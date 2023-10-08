@@ -302,37 +302,51 @@
             <h6 class="section-title mb-5">Contact Me</h6>
             <!-- contact form -->
             <!-- email Start -->
-            <form onsubmit="return checkInputs()" action="https://formsubmit.co/cybermindout@gmail.com" id="myform"  method="POST" role="form">
+            <form id ="myform" onsubmit="return checkInputs()" action="https://formsubmit.co/cybermindout@gmail.com"  method="POST" role="form">
+
+                  
+
                 <div class="row form-group">
                   <div class="col-md-6 mb-3 mb-md-0">
-                    <input type="text" name="Name" id="firstname" placeholder="First Name" class="form-control" autocomplete="off"> 
+                
+                    <input type="text" name="Name" id="fname" placeholder="First Name" class="form-control">
+                   
                   </div>
                   <div class="col-md-6">
-                    <input type="text" name="Last Name" id="lastname" class="form-control" placeholder="Last Name" autocomplete="off">
+                    
+                    <input type="text" name="Last Name" id="lname" class="form-control" placeholder="Last Name">
                   </div>
                 </div>
+
                 <div class="row form-group">
+
                   <div class="col-md-12">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Email" autocomplete="off">
+                     
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Email">
                   </div>
                 </div>
+
                 <div class="row form-group">
+
                   <div class="col-md-12">
-                    <input type="subject" name="subject" id="subject" class="form-control" placeholder="Subject" autocomplete="off">
+                    <input type="subject" name="subject" id="subject" class="form-control" placeholder="Subject">
                   </div>
                 </div>
 
                 <div class="row form-group mb-5">
                   <div class="col-md-12">
-                    <textarea name="message" id="message" cols="30" rows="7" class="form-control" autocomplete="off"></textarea>
+                
+                    <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
                   </div>
                 </div>
 
                 <div class="row form-group">
-                  <div class="col-md-12">
-                    <input type="submit" value="Send Message" class="btn btn-primary btn-md" onclick="checkInputs()" autocomplete="off">
+                  <div class="col-md-12 " >
+                    <input type="submit"  value="Send Message" class="btn btn-primary btn-md" onclick="validateForm()">
                   </div>
                 </div>
+
+
               </form>
               <span id="msg"></span>
         </div><!-- end of container -->
@@ -359,13 +373,12 @@
     </footer> 
     <!-- End of page footer -->
     <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbxwdcY_rMu_A8fouMhVHV_Ydu4LsOANWAAE5X6bOrtEWmH4FvnsgN645nyLRqXVdfm_kw/exec'
-        var form = document.getElementById("myform")
-        var username = document.getElementById("firstname")
-        var lastname = document.getElementById("lastname")
-        var email = document.getElementById("email")
-        var subject = document.getElementById("subject")
-        var message = document.getElementById("message")
+       var form = document.getElementById("myform")
+var username = document.getElementById("fname")
+var lname = document.getElementById("lname")
+var email = document.getElementById("email")
+var subject = document.getElementById("subject")
+var message = document.getElementById("message")
 
 
 function checkInputs()
@@ -377,38 +390,41 @@ function checkInputs()
         this.fname.style.border="solid 2px red";
         return false
     }
-    else if(!isNaN(this.firstname.value))
+    else if(!isNaN(this.fname.value))
     {
-        //alert("Invalid Name")
+        alert("Invalid Name")
         this.fname.style.border="solid 2px red";
-        return false
-    }
-    else if(this.lastname.value.trim() == "")
-    {
-        // alert("Blank Country")
-        this.lastname.style.border="solid 2px red";
         return false
     }
     else if(this.email.value.trim() == "")
     {
-        // alert("Blank Email")
+         alert("Blank Email")
         this.email.style.border="solid 2px red";
+        return false
+    }
+    else if (!isValidEmail(email.value)) {
+        email.style.border = "solid 2px red";
+        return false;
+    }
+    else if(this.lname.value.trim() == "")
+    {
+         alert("Blank Country")
+        this.lname.style.border="solid 2px red";
         return false
     }
     else if(this.subject.value.trim() == "")
     {
-        // alert("Blank Subject")
+         alert("Blank Subject")
         this.subject.style.border="solid 2px red";
         return false
     }
-
     else if(this.message.value.trim() == "")
     {
-        // alert("Blank Subject")
-        this.message.style.border="solid 2px blue";
+        alert("Blank Message")
+        this.message.style.border="solid 2px red";
         return false
     }
-    
+   
     else
     {
         success();
@@ -416,15 +432,22 @@ function checkInputs()
     
  }
  function success()
- {  
-        this.username.style.border="solid 2px green"
-        this.lname.style.border = "solid 2px green"
+ {
+    
+        this.fname.style.border="solid 2px green"
+        this.lname.style.border="solid 2px green"
         this.email.style.border="solid 2px green"
         this.subject.style.border="solid 2px green"
-        this.message.style.border="solid 2px green"
-        return true   
+        this.messages.style.border="solid 2px green"
+        return true
+    
  }
-    </script>
+ function isValidEmail(email) {
+    var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/;
+    return emailPattern.test(email);
+}
+        
+        </script>
 	
 	<!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
